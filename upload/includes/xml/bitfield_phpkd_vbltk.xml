@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<bitfields product="phpkd_vbltk">
+	<bitfielddefs>
+		<group name="nocache">
+			<group name="phpkd_vbltk_qrlocation">
+				<bitfield name="qr">1</bitfield>
+				<bitfield name="pm">2</bitfield>
+				<bitfield name="vm">4</bitfield>
+				<bitfield name="pc">8</bitfield>
+				<bitfield name="sg">16</bitfield>
+				<bitfield name="gp">32</bitfield>
+				<bitfield name="bg">64</bitfield>
+			</group>
+			<group name="phpkd_vbltk_trltr_dstlang">
+				<bitfield name="ar">1</bitfield>
+				<bitfield name="bn">2</bitfield>
+				<bitfield name="gu">4</bitfield>
+				<bitfield name="hi">8</bitfield>
+				<bitfield name="kn">16</bitfield>
+				<bitfield name="ml">32</bitfield>
+				<bitfield name="mr">64</bitfield>
+				<bitfield name="ne">128</bitfield>
+				<bitfield name="fa">256</bitfield>
+				<bitfield name="pa">512</bitfield>
+				<bitfield name="ta">1024</bitfield>
+				<bitfield name="te">2048</bitfield>
+				<bitfield name="ur">4096</bitfield>
+			</group>
+		</group>
+	</bitfielddefs>
+</bitfields>
+
+<!-- SVN: $Version: 4.0.110 $ - $Id: bitfield_phpkd_vbltk.xml 17 2010-03-23 09:47:57Z PHPKD $ -->
