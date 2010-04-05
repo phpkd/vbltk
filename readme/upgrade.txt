@@ -34,4 +34,4 @@ firstChild.nodeValue;qr_disable_controls();qr_hide_errors();phpkd_vbaqr();
      5. You're Done :).
 
 
-$Version: 4.0.110 $ - $Id: upgrade.txt 16 2010-03-22 12:51:06Z PHPKD $
+$Version: 4.0.110 $ - $Id$

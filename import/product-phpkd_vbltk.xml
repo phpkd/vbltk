@@ -5,9 +5,9 @@
 	<description><![CDATA[This product adds extensible multilingual features for international and global forums, these incredible multilingual tools provide you with translation, transliteration and virtual keyboard abilities using Google's powerful language APIs as backend.]]></description>
 	<version><![CDATA[4.0.100]]></version>
 	<vendor><![CDATA[$Vendor: PHP KingDom $]]></vendor>
-	<author><![CDATA[$Author: PHPKD $]]></author>
-	<revision><![CDATA[$Revision: 18 $]]></revision>
-	<released><![CDATA[$Date: 2010-03-23 12:34:50 +0200 (Tue, 23 Mar 2010) $]]></released>
+	<author><![CDATA[$Author$]]></author>
+	<revision><![CDATA[$Revision$]]></revision>
+	<released><![CDATA[$Date$]]></released>
 	<url><![CDATA[http://tools.phpkd.net/en/producthelp/url/vbltk/]]></url>
 	<versioncheckurl><![CDATA[http://tools.phpkd.net/en/producthelp/version/vbltk/]]></versioncheckurl>
 	<extradetails><![CDATA[http://tools.phpkd.net/en/producthelp/info/vbltk/]]></extradetails>
