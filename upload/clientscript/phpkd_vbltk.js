@@ -75,7 +75,7 @@ vB_Text_Editor.prototype.phpkd_vbltk_ajax = function(ajax)
 		{
 			this.phpkd_vbltk_dialog(html[0].firstChild.nodeValue, this.phpkd_vbltk_confirm, true);
 			YAHOO.util.Dom.get("phpkd_vbltk_textarea").focus();
-			YAHOO.util.Event.on("phpkd_vbltk_textarea", "keypress", this.dialog_submit_event, this, true);
+			// YAHOO.util.Event.on("phpkd_vbltk_textarea", "keypress", this.dialog_submit_event, this, true);
 			return;
 		}
 	}

@@ -152,10 +152,10 @@ google.setOnLoadCallback(onLoad);
 </script>
 
 <!-- vB_Editor_QR to be changed when we integrate this product with full/advanced editor mode & other locations -->
-<li><img src="{vb:stylevar imgdir_editor}/transliteration.png" class="imagebutton" id="vB_Editor_QR_cmd_phpkd_vbltk" width="21" height="20" alt="{vb:rawphrase phpkd_vbltk_transliteration_title}" /></li>]]></template>
+<li><img src="{vb:stylevar imgdir_editor}/transliteration.png" class="imagebutton" id="{vb:raw editorid}_cmd_phpkd_vbltk" width="21" height="20" alt="{vb:rawphrase phpkd_vbltk_transliteration_title}" /></li>]]></template>
 		<template name="phpkd_vbltk_40x_transliteration_overlay" templatetype="template" date="1270256936" username="PHPKD" version="4.0.100"><![CDATA[<style type="text/css" id="phpkd_vbltk">
-.editoroverlay.phpkd_vbltk_overlay {width: 550px;}
-.editoroverlay.phpkd_vbltk_overlay input.textbox {width:95%; margin-top:{vb:stylevar padding};}
+.editoroverlay.phpkd_vbltk_overlay {width: 750px;}
+.editoroverlay.phpkd_vbltk_overlay textarea {width: 100%; margin-top:{vb:stylevar padding};}
 </style>
 <div class="block editoroverlay phpkd_vbltk_overlay">
 	<vb:comment>Don't put blockbody here...Adds a margin that we don't want.</vb:comment>
@@ -174,7 +174,7 @@ google.setOnLoadCallback(onLoad);
 		control.showControl("phpkd_vbltk_button");
 		// -->
 		</script>
-		<div style="padding-top: 20px"><textarea name="phpkd_vbltk_textarea" id="phpkd_vbltk_textarea" rows="3" cols="90" dir="ltr" tabindex="1"></textarea></div>
+		<div align="center"><textarea name="phpkd_vbltk_textarea" id="phpkd_vbltk_textarea" rows="3" cols="90" dir="ltr" tabindex="1"></textarea></div>
 		<p class="shade smallfont">{vb:rawphrase phpkd_vbltk_transliteration_desc2, {vb:raw vboptions.phpkd_vbltk_transliteration_shortcut}}</p>
 	</div>
 	<div class="foot">
@@ -191,7 +191,7 @@ google.setOnLoadCallback(onLoad);
 		<plugin active="1" executionorder="5">
 			<title><![CDATA[PHPKD - Language Tool Kit 'Lite' [ Print Admin Options ]]]></title>
 			<hookname>admin_options_print</hookname>
-			<phpcode><![CDATA[if ($setting['optioncode'] == 'phpkd_vbltk_qrlocation' OR $setting['optioncode'] == 'phpkd_vbltk_trltr_dstlang')
+			<phpcode><![CDATA[if ($setting['optioncode'] == 'phpkd_vbltk_qrlocation' OR $setting['optioncode'] == 'phpkd_vbltk_felocation' OR $setting['optioncode'] == 'phpkd_vbltk_trltr_dstlang')
 {
 	$handled = TRUE;
 	$setting['bitfield'] =& fetch_bitfield_definitions('nocache|' . $setting['optioncode']);
@@ -332,6 +332,18 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 
 	switch (THIS_SCRIPT)
 	{
+		case 'newthread':
+			if (!($vbulletin->options['phpkd_vbltk_felocation'] & 1))
+			{
+				$show['phpkd_vbltk_active']  = FALSE;
+			}
+			break;
+		case 'newreply':
+			if (!($vbulletin->options['phpkd_vbltk_felocation'] & 2))
+			{
+				$show['phpkd_vbltk_active']  = FALSE;
+			}
+			break;
 		case 'showthread':
 			if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 1))
 			{
@@ -339,7 +351,7 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 			}
 			break;
 		case 'private':
-			if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 2))
+			if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 2) AND !($vbulletin->options['phpkd_vbltk_felocation'] & 4))
 			{
 				$show['phpkd_vbltk_active']  = FALSE;
 			}
@@ -417,7 +429,7 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 		</plugin>
 		<plugin active="1" executionorder="5">
 			<title><![CDATA[PHPKD - Language Tool Kit 'Lite' [ Main Process ]]]></title>
-			<hookname>parse_templates</hookname>
+			<hookname>editor_toolbar_end</hookname>
 			<phpcode><![CDATA[if ($show['phpkd_vbltk_active'])
 {
 	global $phpkd_vbltk;
@@ -436,16 +448,17 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 		}
 		$phpkd_vbltk_trltr = '"' . implode('", "', $phpkd_vbltk_trltr_langs) . '"';
 
+		$templater->register('editorid', $editorid);
 		$templater->register('phpkd_vbltk', $phpkd_vbltk);
 		$templater->register('phpkd_vbltk_trltr', $phpkd_vbltk_trltr);
 		$phpkd_vbltk_button = $templater->render();
-		$vbulletin->templatecache['phpkd_vbaqr_40x_editor'] = str_replace('<!-- phpkd_vbaqr_extra -->', '<!-- phpkd_vbaqr_extra -->' . $phpkd_vbltk_button, $vbulletin->templatecache['phpkd_vbaqr_40x_editor']);
+		$vbulletin->templatecache[$editor_template_name] = str_replace('<!-- phpkd_vbaqr_extra -->', '<!-- phpkd_vbaqr_extra -->' . $phpkd_vbltk_button, $vbulletin->templatecache[$editor_template_name]);
 	}
 	else if ($phpkd_vbltk['vbversion'] == '38x')
 	{
 		// Not implemented yet!!
 		// eval('$phpkd_vbltk_button = "' . fetch_template('phpkd_vbltk_38x_transliteration') . '";');
-		// $vbulletin->templatecache['phpkd_vbaqr_38x_editor'] = str_replace('<!-- phpkd_vbaqr_extra -->', '<!-- phpkd_vbaqr_extra -->' . $phpkd_vbltk_button, $vbulletin->templatecache['phpkd_vbaqr_38x_editor']);
+		// $vbulletin->templatecache[$editor_template_name] = str_replace('<!-- phpkd_vbaqr_extra -->', '<!-- phpkd_vbaqr_extra -->' . $phpkd_vbltk_button, $vbulletin->templatecache[$editor_template_name]);
 	}
 }]]></phpcode>
 		</plugin>
@@ -457,6 +470,9 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 	</plugins>
 	<phrases>
 		<phrasetype name="Control Panel Options" fieldname="cpoption">
+			<phrase name="phpkd_vbltk_felocation_pm" date="1270473956" username="PHPKD" version="4.0.100"><![CDATA[New Private Message]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_rp" date="1270473924" username="PHPKD" version="4.0.100"><![CDATA[New Thread Reply]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_th" date="1270473937" username="PHPKD" version="4.0.100"><![CDATA[New Thread]]></phrase>
 			<phrase name="phpkd_vbltk_inex_forums_all" date="1264429620" username="PHPKD" version="4.0.100"><![CDATA[Include All Forums]]></phrase>
 			<phrase name="phpkd_vbltk_inex_forums_ex" date="1264429649" username="PHPKD" version="4.0.100"><![CDATA[Exclude Specific Forums]]></phrase>
 			<phrase name="phpkd_vbltk_inex_forums_in" date="1264429634" username="PHPKD" version="4.0.100"><![CDATA[Include Specific Forums]]></phrase>
@@ -510,6 +526,13 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 			<phrase name="setting_phpkd_vbltk_apikey_title" date="1270130504" username="PHPKD" version="4.0.100"><![CDATA[Google AJAX API Key]]></phrase>
 			<phrase name="setting_phpkd_vbltk_default_desc" date="1270041013" username="PHPKD" version="4.0.100"><![CDATA[Which language tool do you wish to set as default for your forum? This choice will be applied by default on all users without customized choice -if user options enabled, otherwise it will be the forced option on all users all over the forum board-.]]></phrase>
 			<phrase name="setting_phpkd_vbltk_default_title" date="1270041013" username="PHPKD" version="4.0.100"><![CDATA[Default Language Tool]]></phrase>
+			<phrase name="setting_phpkd_vbltk_felocation_desc" date="1270474141" username="PHPKD" version="4.0.100"><![CDATA[Where do you wish to activate this product? You've multiple valid locations this product can be applied on & take affect:
+<ol>
+	<li>New Thread</li>
+	<li>New Reply</li>
+	<li>New Private Message</li>
+</ol>]]></phrase>
+			<phrase name="setting_phpkd_vbltk_felocation_title" date="1270474141" username="PHPKD" version="4.0.100"><![CDATA[Applied Full Editor Locations]]></phrase>
 			<phrase name="setting_phpkd_vbltk_inex_forums_desc" date="1269336845" username="PHPKD" version="4.0.100"><![CDATA[You can specify certain forums to have this product's effect, or to exclude others from being participated at all.<br />
 You've three options to choose from:<br />
 <ul>
@@ -543,7 +566,7 @@ Select "Include All Users" for the product to take effect on all users (<strong>
 			<phrase name="setting_phpkd_vbltk_inex_users_ids_desc" date="1269336845" username="PHPKD" version="4.0.100"><![CDATA[If you've chosen "Include Specific Users" OR "Exclude Specific Users" from the above setting, then you've to enter those specified user IDs here in this setting's field. Please enter user IDs separated with commas.]]></phrase>
 			<phrase name="setting_phpkd_vbltk_inex_users_ids_title" date="1269336845" username="PHPKD" version="4.0.100"><![CDATA[Included/Excluded Users]]></phrase>
 			<phrase name="setting_phpkd_vbltk_inex_users_title" date="1269336845" username="PHPKD" version="4.0.100"><![CDATA[Include/Exclude Users]]></phrase>
-			<phrase name="setting_phpkd_vbltk_qrlocation_desc" date="1270049031" username="PHPKD" version="4.0.100"><![CDATA[Where do you wish to activate this product? You've four valid locations this product can be applied on & take affect:
+			<phrase name="setting_phpkd_vbltk_qrlocation_desc" date="1270049031" username="PHPKD" version="4.0.100"><![CDATA[Where do you wish to activate this product? You've multiple valid locations this product can be applied on & take affect:
 <ol>
 	<li>Thread Quick Reply</li>
 	<li>Private Message Quick Reply</li>
@@ -607,6 +630,11 @@ Select "Include All Users" for the product to take effect on all users (<strong>
 				<datatype>bitfield</datatype>
 				<optioncode>phpkd_vbltk_qrlocation</optioncode>
 				<defaultvalue>127</defaultvalue>
+			</setting>
+			<setting varname="phpkd_vbltk_felocation" displayorder="22">
+				<datatype>bitfield</datatype>
+				<optioncode>phpkd_vbltk_felocation</optioncode>
+				<defaultvalue>7</defaultvalue>
 			</setting>
 			<setting varname="phpkd_vbltk_inex_users" displayorder="70">
 				<datatype>integer</datatype>
