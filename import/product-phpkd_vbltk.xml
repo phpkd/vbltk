@@ -12,7 +12,6 @@
 	<versioncheckurl><![CDATA[http://tools.phpkd.net/en/producthelp/version/vbltk/]]></versioncheckurl>
 	<extradetails><![CDATA[http://tools.phpkd.net/en/producthelp/info/vbltk/]]></extradetails>
 	<dependencies>
-		<dependency dependencytype="product" parentproductid="phpkd_vbaqr" minversion="4.0.111" maxversion="4.0.999" />
 		<dependency dependencytype="vbulletin" minversion="3.8.0" maxversion="4.0.99" />
 	</dependencies>
 	<codes>
@@ -123,7 +122,7 @@ $vbulletin->db->show_errors();
 		</code>
 	</codes>
 	<templates>
-		<template name="phpkd_vbltk_40x_transliteration" templatetype="template" date="1270256689" username="PHPKD" version="4.0.100"><![CDATA[<script type="text/javascript" src="clientscript/phpkd_vbltk.js?vb={vb:raw vboptions.simpleversion}&amp;v={vb:raw phpkd_vbltk.version}"></script>
+		<template name="phpkd_vbltk_40x_headinclude" templatetype="template" date="1271587397" username="PHPKD" version="4.0.100"><![CDATA[<!-- Product's Debug Info: Name: $phpkd_vbltk[title], vB Version: $phpkd_vbltk[vbversion], Version: $phpkd_vbltk[version], Revision: $phpkd_vbltk[revision], Released: $phpkd_vbltk[released]. -->
 <script type="text/javascript" src="http://www.google.com/jsapi<vb:if condition="$vboptions['phpkd_vbltk_apikey']">?key={vb:raw vboptions.phpkd_vbltk_apikey}</vb:if>"></script>
 <script type="text/javascript">
 <!--
@@ -146,13 +145,26 @@ function onLoad()
 {
 	// Create an instance on TransliterationControl with the required options
 	control = new google.elements.transliteration.TransliterationControl(options);
+
+	// Enable transliteration in the textfields with the given ids.
+	var ids = [{vb:raw phpkd_vbltk_subject}];
+	control.makeTransliteratable(ids);
+
+	// Show the transliteration control which can be used to toggle between languages.
+	// control.showControl("phpkd_vbltk_subject");
 }
 google.setOnLoadCallback(onLoad);
 // -->
 </script>
-
-<!-- vB_Editor_QR to be changed when we integrate this product with full/advanced editor mode & other locations -->
-<li><img src="{vb:stylevar imgdir_editor}/transliteration.png" class="imagebutton" id="{vb:raw editorid}_cmd_phpkd_vbltk" width="21" height="20" alt="{vb:rawphrase phpkd_vbltk_transliteration_title}" /></li>]]></template>
+<!-- Product's Debug Info: Name: $phpkd_vbltk[title], vB Version: $phpkd_vbltk[vbversion], Version: $phpkd_vbltk[version], Revision: $phpkd_vbltk[revision], Released: $phpkd_vbltk[released]. -->]]></template>
+		<template name="phpkd_vbltk_40x_transliteration" templatetype="template" date="1271585966" username="PHPKD" version="4.0.100"><![CDATA[{vb:rawphrase remove_text_formatting}" />
+				</li>
+				<!-- Product's Debug Info: Name: $phpkd_vbltk[title], vB Version: $phpkd_vbltk[vbversion], Version: $phpkd_vbltk[version], Revision: $phpkd_vbltk[revision], Released: $phpkd_vbltk[released]. -->
+				<script type="text/javascript" src="clientscript/phpkd_vbltk.js?vb={vb:raw vboptions.simpleversion}&amp;v={vb:raw phpkd_vbltk.version}"></script>
+				<li>
+					<img src="{vb:stylevar imgdir_editor}/transliteration.png" class="imagebutton" id="{vb:raw editorid}_cmd_phpkd_vbltk" width="20" height="20" alt="{vb:rawphrase phpkd_vbltk_transliteration_title}" />
+				</li>
+				<!-- Product's Debug Info: Name: $phpkd_vbltk[title], vB Version: $phpkd_vbltk[vbversion], Version: $phpkd_vbltk[version], Revision: $phpkd_vbltk[revision], Released: $phpkd_vbltk[released]. -->]]></template>
 		<template name="phpkd_vbltk_40x_transliteration_overlay" templatetype="template" date="1270256936" username="PHPKD" version="4.0.100"><![CDATA[<style type="text/css" id="phpkd_vbltk">
 .editoroverlay.phpkd_vbltk_overlay {width: 750px;}
 .editoroverlay.phpkd_vbltk_overlay textarea {width: 100%; margin-top:{vb:stylevar padding};}
@@ -266,7 +278,7 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 			<hookname>cache_templates</hookname>
 			<phpcode><![CDATA[if ($vbulletin->options['phpkd_vbltk_active'] AND $vbulletin->userinfo['userid'])
 {
-	$show['phpkd_vbltk_active']      = TRUE;
+	$show['phpkd_vbltk_active']      = true;
 	$phpkd_vbltk_inex_users_ids      = @explode(',', trim($vbulletin->options['phpkd_vbltk_inex_users_ids']));
 	$phpkd_vbltk_inex_usergroups_ids = @explode(',', trim($vbulletin->options['phpkd_vbltk_inex_usergroups_ids']));
 	$phpkd_vbltk_inex_forums_ids     = @explode(',', trim($vbulletin->options['phpkd_vbltk_inex_forums_ids']));
@@ -278,13 +290,13 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 		case 1:
 			if (is_array($phpkd_vbltk_inex_users_ids) AND !empty($phpkd_vbltk_inex_users_ids) AND !in_array($vbulletin->userinfo['userid'], $phpkd_vbltk_inex_users_ids))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 		case 2:
 			if (is_array($phpkd_vbltk_inex_users_ids) AND !empty($phpkd_vbltk_inex_users_ids) AND in_array($vbulletin->userinfo['userid'], $phpkd_vbltk_inex_users_ids))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 	}
@@ -295,13 +307,13 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 		case 1:
 			if (is_array($phpkd_vbltk_inex_usergroups_ids) AND !empty($phpkd_vbltk_inex_usergroups_ids) AND !in_array($vbulletin->userinfo['usergroupid'], $phpkd_vbltk_inex_usergroups_ids))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 		case 2:
 			if (is_array($phpkd_vbltk_inex_usergroups_ids) AND !empty($phpkd_vbltk_inex_usergroups_ids) AND in_array($vbulletin->userinfo['usergroupid'], $phpkd_vbltk_inex_usergroups_ids))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 	}
@@ -312,13 +324,13 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 		case 1:
 			if (is_array($phpkd_vbltk_inex_forums_ids) AND !empty($phpkd_vbltk_inex_forums_ids) AND !in_array($foruminfo['forumid'], $phpkd_vbltk_inex_forums_ids))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 		case 2:
 			if (is_array($phpkd_vbltk_inex_forums_ids) AND !empty($phpkd_vbltk_inex_forums_ids) AND in_array($foruminfo['forumid'], $phpkd_vbltk_inex_forums_ids))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 	}
@@ -326,61 +338,160 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 
 	if (is_array($phpkd_vbltk_styleids) AND !empty($phpkd_vbltk_styleids) AND !in_array($style['styleid'], $phpkd_vbltk_styleids))
 	{
-		$show['phpkd_vbltk_active']  = FALSE;
+		$show['phpkd_vbltk_active'] = false;
 	}
 
 
+	// Check ON/OFF global switch
 	switch (THIS_SCRIPT)
 	{
+		// Advanced Editor
 		case 'newthread':
 			if (!($vbulletin->options['phpkd_vbltk_felocation'] & 1))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 		case 'newreply':
 			if (!($vbulletin->options['phpkd_vbltk_felocation'] & 2))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
-		case 'showthread':
-			if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 1))
+		case 'editpost':
+			if (!($vbulletin->options['phpkd_vbltk_felocation'] & 4))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'visitormessage':
+			// Quick Edit | Advanced Editor
+			if (($_REQUEST['do'] == 'quickedit' AND !($vbulletin->options['phpkd_vbltk_qelocation'] & 2)) OR (!$vbulletin->GPC['vmid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 16)) OR ($vbulletin->GPC['vmid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 32)))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'picturecomment':
+			// Album Picture Commenct Quick Edit | Add Album Picture Comment | Edit Album Picture Comment | Add Social Group Picture Comment | Edit Social Group Picture Comment
+			if (($_POST['do'] == 'quickedit' AND !($vbulletin->options['phpkd_vbltk_qelocation'] & 4)) OR ($_REQUEST['do'] == 'message' AND (($vbulletin->GPC['albumid'] AND !$vbulletin->GPC['groupid'] AND !$vbulletin->GPC['commentid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 4096)) OR ($vbulletin->GPC['albumid'] AND !$vbulletin->GPC['groupid'] AND $vbulletin->GPC['commentid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 8192)) OR (!$vbulletin->GPC['albumid'] AND $vbulletin->GPC['groupid'] AND !$vbulletin->GPC['commentid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 1024)) OR (!$vbulletin->GPC['albumid'] AND $vbulletin->GPC['groupid'] AND $vbulletin->GPC['commentid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 2048)))))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'announcement':
+			if ((!$vbulletin->GPC['announcementid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 16384)) OR ($vbulletin->GPC['announcementid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 32768)))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'calendar':
+			if (($_REQUEST['do'] == 'add' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 65536)) OR ($_REQUEST['do'] == 'manage' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 131072)))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'profile':
+			if ($_REQUEST['do'] == 'editsignature' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 262144))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'usernote':
+			if (($_REQUEST['do'] == 'newnote' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 524288)) OR $_REQUEST['do'] == 'editnote' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 1048576))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'infraction':
+			if (!($vbulletin->options['phpkd_vbltk_felocation'] & 2097152))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'blog_post':
+			if (($_REQUEST['do'] == 'newblog' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 8388608)) OR ($_REQUEST['do'] == 'editblog' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 16777216)) OR ($_REQUEST['do'] == 'comment' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 33554432)) OR ($_REQUEST['do'] == 'editcomment' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 67108864)))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'blog_usercp':
+			if (($_REQUEST['do'] == 'editprofile' AND !($vbulletin->options['phpkd_vbltk_felocation'] & 4194304)) OR ($_REQUEST['do'] == 'modifyblock' AND $vbulletin->GPC['type'] == 'block' AND !$vbulletin->GPC['customblockid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 134217728)) OR ($_REQUEST['do'] == 'modifyblock' AND $vbulletin->GPC['type'] == 'block' AND $vbulletin->GPC['customblockid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 268435456)) OR ($_REQUEST['do'] == 'modifyblock' AND $vbulletin->GPC['type'] == 'page' AND !$vbulletin->GPC['customblockid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 536870912)) OR ($_REQUEST['do'] == 'modifyblock' AND $vbulletin->GPC['type'] == 'page' AND $vbulletin->GPC['customblockid'] AND !($vbulletin->options['phpkd_vbltk_felocation'] & 1073741824)))
+			{
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 		case 'private':
 			if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 2) AND !($vbulletin->options['phpkd_vbltk_felocation'] & 4))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+
+		// Quick Edit
+		case 'ajax':
+			if (!($vbulletin->options['phpkd_vbltk_qelocation'] & 1))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+		case 'blog_ajax':
+			if (!($vbulletin->options['phpkd_vbltk_qelocation'] & 16))
+			{
+				$show['phpkd_vbltk_active'] = false;
+			}
+			break;
+
+		// Quick Reply
+		case 'showthread':
+			if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 1))
+			{
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 		case 'member':
 			if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 4))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 		case 'album':
 			if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 8))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
 		case 'group':
 			switch ($_REQUEST['do'])
 			{
+				// Advanced Editor
+				case 'message':
+					global $edit_discussion;
+					// Add Group Discussion | Edit Group Discussion | Add Group Reply | Edit Group Reply
+					if (($vbulletin->GPC['groupid'] AND !$vbulletin->GPC['discussionid'] AND !$vbulletin->GPC['gmid'] AND $edit_discussion AND !($vbulletin->options['phpkd_vbltk_felocation'] & 64)) OR ($vbulletin->GPC['groupid'] AND $vbulletin->GPC['discussionid'] AND $vbulletin->GPC['gmid'] AND $edit_discussion AND !($vbulletin->options['phpkd_vbltk_felocation'] & 128)) OR ($vbulletin->GPC['groupid'] AND $vbulletin->GPC['discussionid'] AND !$vbulletin->GPC['gmid'] AND !$edit_discussion AND !($vbulletin->options['phpkd_vbltk_felocation'] & 256)) OR ($vbulletin->GPC['groupid'] AND $vbulletin->GPC['discussionid'] AND $vbulletin->GPC['gmid'] AND !$edit_discussion AND !($vbulletin->options['phpkd_vbltk_felocation'] & 512)))
+					{
+						$show['phpkd_vbltk_active'] = false;
+					}
+					break;
+
+				// Quick Edit
+				case 'quickedit':
+					if (!($vbulletin->options['phpkd_vbltk_qelocation'] & 8))
+					{
+						$show['phpkd_vbltk_active'] = false;
+					}
+					break;
+
+				// Quick Reply
 				case 'discuss':
 					if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 16))
 					{
-						$show['phpkd_vbltk_active']  = FALSE;
+						$show['phpkd_vbltk_active'] = false;
 					}
 					break;
 				case 'picture':
 					if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 32))
 					{
-						$show['phpkd_vbltk_active']  = FALSE;
+						$show['phpkd_vbltk_active'] = false;
 					}
 					break;
 			}
@@ -389,17 +500,52 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 		case 'blog':
 			if (!($vbulletin->options['phpkd_vbltk_qrlocation'] & 64))
 			{
-				$show['phpkd_vbltk_active']  = FALSE;
+				$show['phpkd_vbltk_active'] = false;
 			}
 			break;
+
+		//  Not matched!
 		default:
-			$show['phpkd_vbltk_active']  = FALSE;
+			$show['phpkd_vbltk_active'] = false;
 			break;
 	}
 
 
 	if ($show['phpkd_vbltk_active'])
 	{
+		// Determine transliteratable subject fields
+		$phpkd_vbltk_subject = '';
+		switch (THIS_SCRIPT)
+		{
+			case 'newthread':
+				$phpkd_vbltk_subject = 'subject';
+				break;
+			case 'newreply':
+			case 'private':
+				$phpkd_vbltk_subject = 'title';
+				break;
+			case 'editpost':
+			case 'announcement':
+			case 'calendar':
+			case 'usernote':
+				$phpkd_vbltk_subject = 'titlefield';
+				break;
+			case 'infraction':
+				$phpkd_vbltk_subject = 'note';
+				break;
+			case 'blog_usercp':
+				if ($_REQUEST['do'] == 'editprofile')
+				{
+					$phpkd_vbltk_subject = 'text_blog_title';
+				}
+				else
+				{
+					$phpkd_vbltk_subject = 'title';
+				}
+				break;
+		}
+
+
 		// Prepare Debiugging Data!
 		if (!$phpkd_vbltk AND $phpkd_vbltk_data = @unserialize(trim($vbulletin->options['phpkd_free40_data'])))
 		{
@@ -418,6 +564,33 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 		{
 			$phpkd_vbltk['vbversion'] = '40x';
 			$cache[] = 'phpkd_vbltk_40x_transliteration';
+			$cache[] = 'phpkd_vbltk_40x_headinclude';
+
+
+			$templater = vB_Template::create('phpkd_vbltk_40x_headinclude');
+
+			$phpkd_vbltk_trltr_langs = array($vbulletin->options['phpkd_vbltk_transliteration_dstlang_def']);
+			$phpkd_vbltk_trltr_dstlang = array('ar' => 1, 'bn' => 2, 'gu' => 4, 'hi' => 8, 'kn' => 16, 'ml' => 32, 'mr' => 64, 'ne' => 128, 'fa' => 256, 'pa' => 512, 'ta' => 1024, 'te' => 2048, 'ur' => 4096);
+			foreach ($phpkd_vbltk_trltr_dstlang AS $key => $value)
+			{
+				if ($key != $vbulletin->options['phpkd_vbltk_transliteration_dstlang_def'] AND ($vbulletin->options['phpkd_vbltk_transliteration_dstlang'] & $value))
+				{
+					$phpkd_vbltk_trltr_langs[] = $key;
+				}
+			}
+			$phpkd_vbltk_trltr = '"' . implode('", "', $phpkd_vbltk_trltr_langs) . '"';
+
+			$templater->register('phpkd_vbltk', $phpkd_vbltk);
+			$templater->register('phpkd_vbltk_trltr', $phpkd_vbltk_trltr);
+			$templater->register('phpkd_vbltk_subject', "\"" . $phpkd_vbltk_subject . "\"");
+			$phpkd_vbltk_button = $templater->render();
+
+
+			if (!isset($template_hook))
+			{
+				global $template_hook;
+			}
+			$template_hook['headinclude_javascript'] .= $phpkd_vbltk_button;
 		}
 		else
 		{
@@ -436,29 +609,14 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 	if ($phpkd_vbltk['vbversion'] == '40x')
 	{
 		$templater = vB_Template::create('phpkd_vbltk_40x_transliteration');
-
-		$phpkd_vbltk_trltr_langs = array($vbulletin->options['phpkd_vbltk_transliteration_dstlang_def']);
-		$phpkd_vbltk_trltr_dstlang = array('ar' => 1, 'bn' => 2, 'gu' => 4, 'hi' => 8, 'kn' => 16, 'ml' => 32, 'mr' => 64, 'ne' => 128, 'fa' => 256, 'pa' => 512, 'ta' => 1024, 'te' => 2048, 'ur' => 4096);
-		foreach ($phpkd_vbltk_trltr_dstlang AS $key => $value)
-		{
-			if ($key != $vbulletin->options['phpkd_vbltk_transliteration_dstlang_def'] AND ($vbulletin->options['phpkd_vbltk_transliteration_dstlang'] & $value))
-			{
-				$phpkd_vbltk_trltr_langs[] = $key;
-			}
-		}
-		$phpkd_vbltk_trltr = '"' . implode('", "', $phpkd_vbltk_trltr_langs) . '"';
-
 		$templater->register('editorid', $editorid);
 		$templater->register('phpkd_vbltk', $phpkd_vbltk);
-		$templater->register('phpkd_vbltk_trltr', $phpkd_vbltk_trltr);
 		$phpkd_vbltk_button = $templater->render();
-		$vbulletin->templatecache[$editor_template_name] = str_replace('<!-- phpkd_vbaqr_extra -->', '<!-- phpkd_vbaqr_extra -->' . $phpkd_vbltk_button, $vbulletin->templatecache[$editor_template_name]);
+		$vbulletin->templatecache[$editor_template_name] = str_replace('\' . vB_Template_Runtime::parsePhrase("remove_text_formatting") . \'" />', $phpkd_vbltk_button, $vbulletin->templatecache[$editor_template_name]);
 	}
 	else if ($phpkd_vbltk['vbversion'] == '38x')
 	{
 		// Not implemented yet!!
-		// eval('$phpkd_vbltk_button = "' . fetch_template('phpkd_vbltk_38x_transliteration') . '";');
-		// $vbulletin->templatecache[$editor_template_name] = str_replace('<!-- phpkd_vbaqr_extra -->', '<!-- phpkd_vbaqr_extra -->' . $phpkd_vbltk_button, $vbulletin->templatecache[$editor_template_name]);
 	}
 }]]></phpcode>
 		</plugin>
@@ -470,9 +628,37 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 	</plugins>
 	<phrases>
 		<phrasetype name="Control Panel Options" fieldname="cpoption">
-			<phrase name="phpkd_vbltk_felocation_pm" date="1270473956" username="PHPKD" version="4.0.100"><![CDATA[New Private Message]]></phrase>
-			<phrase name="phpkd_vbltk_felocation_rp" date="1270473924" username="PHPKD" version="4.0.100"><![CDATA[New Thread Reply]]></phrase>
-			<phrase name="phpkd_vbltk_felocation_th" date="1270473937" username="PHPKD" version="4.0.100"><![CDATA[New Thread]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_ana" date="1271163255" username="PHPKD" version="4.0.100"><![CDATA[Add Forum Announcement]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_ane" date="1271163231" username="PHPKD" version="4.0.100"><![CDATA[Edit Forum Announcement]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_bba" date="1271163139" username="PHPKD" version="4.0.100"><![CDATA[Add Blog Custom Block]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_bbe" date="1271163148" username="PHPKD" version="4.0.100"><![CDATA[Edit Blog Custom Block]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_bca" date="1271163100" username="PHPKD" version="4.0.100"><![CDATA[Add Blog Comment]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_bce" date="1271163108" username="PHPKD" version="4.0.100"><![CDATA[Edit Blog Comment]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_bea" date="1271163066" username="PHPKD" version="4.0.100"><![CDATA[Add Blog Entry]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_bee" date="1271163075" username="PHPKD" version="4.0.100"><![CDATA[Edit Blog Entry]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_bge" date="1271163047" username="PHPKD" version="4.0.100"><![CDATA[Manage Blog Title & Description]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_bpa" date="1271163167" username="PHPKD" version="4.0.100"><![CDATA[Add Blog Custom Page]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_bpe" date="1271163176" username="PHPKD" version="4.0.100"><![CDATA[Edit Blog Custom Page]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_cea" date="1271163285" username="PHPKD" version="4.0.100"><![CDATA[Add Calendar Event]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_cee" date="1271163294" username="PHPKD" version="4.0.100"><![CDATA[Edit Calendar Event]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_gda" date="1271159056" username="PHPKD" version="4.0.100"><![CDATA[Add Social Group Discussion]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_gde" date="1271159064" username="PHPKD" version="4.0.100"><![CDATA[Edit Social Group Discussion]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_gpa" date="1271159092" username="PHPKD" version="4.0.100"><![CDATA[Add Group Picture Comment]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_gpe" date="1271159100" username="PHPKD" version="4.0.100"><![CDATA[Edit Group Picture Comment]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_gra" date="1271207992" username="PHPKD" version="4.0.100"><![CDATA[Add Social Group Reply]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_gre" date="1271208002" username="PHPKD" version="4.0.100"><![CDATA[Edit Social Group Reply]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_pca" date="1271162987" username="PHPKD" version="4.0.100"><![CDATA[Add Picture Comment]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_pce" date="1271162995" username="PHPKD" version="4.0.100"><![CDATA[Edit Picture Comment]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_pma" date="1271158668" username="PHPKD" version="4.0.100"><![CDATA[New Private Message]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_poa" date="1271158767" username="PHPKD" version="4.0.100"><![CDATA[Add Thread Reply]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_poe" date="1271158975" username="PHPKD" version="4.0.100"><![CDATA[Edit Thread Reply]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_sge" date="1271163311" username="PHPKD" version="4.0.100"><![CDATA[Manage Signature]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_tha" date="1271158742" username="PHPKD" version="4.0.100"><![CDATA[Add New Thread]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_uia" date="1271163374" username="PHPKD" version="4.0.100"><![CDATA[Add User Infraction]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_una" date="1271163344" username="PHPKD" version="4.0.100"><![CDATA[Add User Note]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_une" date="1271163354" username="PHPKD" version="4.0.100"><![CDATA[Edit User Note]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_vma" date="1271159014" username="PHPKD" version="4.0.100"><![CDATA[Add Visitor Message]]></phrase>
+			<phrase name="phpkd_vbltk_felocation_vme" date="1271159025" username="PHPKD" version="4.0.100"><![CDATA[Edit Visitor Message]]></phrase>
 			<phrase name="phpkd_vbltk_inex_forums_all" date="1264429620" username="PHPKD" version="4.0.100"><![CDATA[Include All Forums]]></phrase>
 			<phrase name="phpkd_vbltk_inex_forums_ex" date="1264429649" username="PHPKD" version="4.0.100"><![CDATA[Exclude Specific Forums]]></phrase>
 			<phrase name="phpkd_vbltk_inex_forums_in" date="1264429634" username="PHPKD" version="4.0.100"><![CDATA[Include Specific Forums]]></phrase>
@@ -482,12 +668,12 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 			<phrase name="phpkd_vbltk_inex_users_all" date="1264428993" username="PHPKD" version="4.0.100"><![CDATA[Include All Users]]></phrase>
 			<phrase name="phpkd_vbltk_inex_users_ex" date="1264429019" username="PHPKD" version="4.0.100"><![CDATA[Exclude Specific Users]]></phrase>
 			<phrase name="phpkd_vbltk_inex_users_in" date="1264429006" username="PHPKD" version="4.0.100"><![CDATA[Include Specific Users]]></phrase>
-			<phrase name="phpkd_vbltk_qrlocation_bg" date="1269247357" username="PHPKD" version="4.0.100"><![CDATA[Blog Comments]]></phrase>
+			<phrase name="phpkd_vbltk_qrlocation_bg" date="1271158898" username="PHPKD" version="4.0.100"><![CDATA[Blog Comment]]></phrase>
 			<phrase name="phpkd_vbltk_qrlocation_gp" date="1265046811" username="PHPKD" version="4.0.100"><![CDATA[Social Group Picture Comment]]></phrase>
 			<phrase name="phpkd_vbltk_qrlocation_pc" date="1264509847" username="PHPKD" version="4.0.100"><![CDATA[Album Picture Comment]]></phrase>
 			<phrase name="phpkd_vbltk_qrlocation_pm" date="1264509870" username="PHPKD" version="4.0.100"><![CDATA[Private Message Quick Reply]]></phrase>
-			<phrase name="phpkd_vbltk_qrlocation_qr" date="1264509821" username="PHPKD" version="4.0.100"><![CDATA[Thread Quick Reply]]></phrase>
-			<phrase name="phpkd_vbltk_qrlocation_sg" date="1265046033" username="PHPKD" version="4.0.100"><![CDATA[Social Group Comment]]></phrase>
+			<phrase name="phpkd_vbltk_qrlocation_po" date="1271158842" username="PHPKD" version="4.0.100"><![CDATA[Thread Quick Reply]]></phrase>
+			<phrase name="phpkd_vbltk_qrlocation_gd" date="1265046033" username="PHPKD" version="4.0.100"><![CDATA[Social Group Comment]]></phrase>
 			<phrase name="phpkd_vbltk_qrlocation_vm" date="1264509836" username="PHPKD" version="4.0.100"><![CDATA[Profile Visitor Message]]></phrase>
 			<phrase name="phpkd_vbltk_select_styles" date="1264472426" username="PHPKD" version="4.0.100"><![CDATA[Select Style(s)]]></phrase>
 			<phrase name="phpkd_vbltk_translation" date="1270032608" username="PHPKD" version="4.0.100"><![CDATA[Translation]]></phrase>
@@ -566,7 +752,7 @@ Select "Include All Users" for the product to take effect on all users (<strong>
 			<phrase name="setting_phpkd_vbltk_inex_users_ids_desc" date="1269336845" username="PHPKD" version="4.0.100"><![CDATA[If you've chosen "Include Specific Users" OR "Exclude Specific Users" from the above setting, then you've to enter those specified user IDs here in this setting's field. Please enter user IDs separated with commas.]]></phrase>
 			<phrase name="setting_phpkd_vbltk_inex_users_ids_title" date="1269336845" username="PHPKD" version="4.0.100"><![CDATA[Included/Excluded Users]]></phrase>
 			<phrase name="setting_phpkd_vbltk_inex_users_title" date="1269336845" username="PHPKD" version="4.0.100"><![CDATA[Include/Exclude Users]]></phrase>
-			<phrase name="setting_phpkd_vbltk_qrlocation_desc" date="1270049031" username="PHPKD" version="4.0.100"><![CDATA[Where do you wish to activate this product? You've multiple valid locations this product can be applied on & take affect:
+			<phrase name="setting_phpkd_vbltk_qrlocation_desc" date="1271144422" username="PHPKD" version="4.0.100"><![CDATA[Where do you wish to activate this product? You've multiple valid locations this product can be applied on & take affect:
 <ol>
 	<li>Thread Quick Reply</li>
 	<li>Private Message Quick Reply</li>
@@ -576,7 +762,7 @@ Select "Include All Users" for the product to take effect on all users (<strong>
 	<li>Social Group Picture Comment</li>
 	<li>Blog Comments</li>
 </ol>]]></phrase>
-			<phrase name="setting_phpkd_vbltk_qrlocation_title" date="1270049031" username="PHPKD" version="4.0.100"><![CDATA[Applied Quick Reply Locations]]></phrase>
+			<phrase name="setting_phpkd_vbltk_qrlocation_title" date="1271144422" username="PHPKD" version="4.0.100"><![CDATA[Applied Quick Reply Locations]]></phrase>
 			<phrase name="setting_phpkd_vbltk_styleids_desc" date="1269336845" username="PHPKD" version="4.0.100"><![CDATA[You can enable this product on certain styles only & keep it disabled for others, just select the styles you wish this product to take affect on. For multiple selecting press 'CTRL' & keep holding it while selecting.]]></phrase>
 			<phrase name="setting_phpkd_vbltk_styleids_title" date="1269336845" username="PHPKD" version="4.0.100"><![CDATA[Affected Styles]]></phrase>
 			<phrase name="setting_phpkd_vbltk_translation_active_desc" date="1270073784" username="PHPKD" version="4.0.100"><![CDATA[When enabled, text typed within input fields & text areas -where the translation is enabled- will be auto translated. Just hitting space or typing punctuation character after the word will make that word auto translated to the destination language. Note: There's a switch button within the editor buttons always available for users to activate or deactivate auto translation.]]></phrase>
