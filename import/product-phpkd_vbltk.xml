@@ -515,87 +515,6 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 
 	if ($show['phpkd_vbltk_active'])
 	{
-		// Determine transliteratable subject fields
-
-		// vBulletin 3.8.x/4.0.x Compatibility!
-		if (substr(SIMPLE_VERSION, 0, 1) >= 4)
-		{
-			global $phpkd_vbltk_title;
-		}
-
-		$phpkd_vbltk_title = $phpkd_vbltk_subject = $phpkd_vbltk_search = $phpkd_vbltk_replace = '';
-		switch (THIS_SCRIPT)
-		{
-			case 'newthread':
-				$phpkd_vbltk_title = 'subject';
-				$phpkd_vbltk_subject = 'newthread';
-				$phpkd_vbltk_search = '<img id="display_posticon"';
-				$phpkd_vbltk_replace = '<span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span><img id="display_posticon"';
-				break;
-			case 'newreply':
-				$phpkd_vbltk_title = 'title';
-				$phpkd_vbltk_subject = 'newreply';
-				$phpkd_vbltk_search = '<img id="display_posticon"';
-				$phpkd_vbltk_replace = '<span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span><img id="display_posticon"';
-				break;
-			case 'private':
-				$phpkd_vbltk_title = 'title';
-				$phpkd_vbltk_subject = 'pm_newpm';
-				$phpkd_vbltk_search = '<img id="display_posticon"';
-				$phpkd_vbltk_replace = '<span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span><img id="display_posticon"';
-				break;
-			case 'editpost':
-				$phpkd_vbltk_title = 'titlefield';
-				$phpkd_vbltk_subject = 'editpost';
-				$phpkd_vbltk_search = '<img id="posticon_preview"';
-				$phpkd_vbltk_replace = '<span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span><img id="posticon_preview"';
-				break;
-			case 'announcement':
-				$phpkd_vbltk_title = 'titlefield';
-				$phpkd_vbltk_subject = 'announcement_edit';
-				$phpkd_vbltk_search = 'value="\' . $announcementinfo[\'title_safe\'] . \'" tabindex="1" />';
-				$phpkd_vbltk_replace = 'value="\' . $announcementinfo[\'title_safe\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>';
-				break;
-			case 'calendar':
-				$phpkd_vbltk_title = 'titlefield';
-				$phpkd_vbltk_subject = 'calendar_edit';
-				$phpkd_vbltk_search = 'value="\' . $title . \'" tabindex="1"/>';
-				$phpkd_vbltk_replace = 'value="\' . $title . \'" tabindex="1"/><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
-				break;
-			case 'usernote':
-				$phpkd_vbltk_title = 'titlefield';
-				$phpkd_vbltk_subject = 'usernote_note';
-				$phpkd_vbltk_search = 'value="\' . $noteinfo[\'title\'] . \'" tabindex="1" />';
-				$phpkd_vbltk_replace = 'value="\' . $noteinfo[\'title\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
-				break;
-			case 'infraction':
-				$phpkd_vbltk_title = 'note';
-				$phpkd_vbltk_subject = 'userinfraction';
-				$phpkd_vbltk_search = 'value="\' . $note . \'" tabindex="1" />';
-				$phpkd_vbltk_replace = 'value="\' . $note . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
-				break;
-			case 'blog_usercp':
-				if ($_REQUEST['do'] == 'editprofile')
-				{
-					$phpkd_vbltk_title = 'text_blog_title';
-					$phpkd_vbltk_subject = 'blog_cp_modify_profile';
-					$phpkd_vbltk_search = 'value="\' . $bloguserinfo[\'title\'] . \'" tabindex="1" />';
-					$phpkd_vbltk_replace = 'value="\' . $bloguserinfo[\'title\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
-				}
-				else
-				{
-					$phpkd_vbltk_title = 'title';
-					$phpkd_vbltk_subject = 'blog_entry_editor';
-					$phpkd_vbltk_search = 'maxlength="\' . $vboptions[\'titlemaxchars\'] . \'" tabindex="1" />';
-					$phpkd_vbltk_replace = 'maxlength="\' . $vboptions[\'titlemaxchars\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
-				}
-				// maxlength="{vb:raw vboptions.titlemaxchars}" tabindex="1" />
-				break;
-		}
-
-		$vbulletin->templatecache[$phpkd_vbltk_subject] = str_replace($phpkd_vbltk_search, $phpkd_vbltk_replace, $vbulletin->templatecache[$phpkd_vbltk_subject]);
-
-
 		// Prepare Debugging Data!
 		if (!$phpkd_vbltk AND $phpkd_vbltk_data = @unserialize(trim($vbulletin->options['phpkd_free40_data'])))
 		{
@@ -652,8 +571,83 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 	// vBulletin 3.8.x/4.0.x Compatibility!
 	if (substr(SIMPLE_VERSION, 0, 1) >= 4)
 	{
-		global $phpkd_vbltk, $phpkd_vbltk_title;
+		global $phpkd_vbltk;
 	}
+
+
+	// Determine transliteratable subject fields
+	$phpkd_vbltk_title = $phpkd_vbltk_subject = $phpkd_vbltk_search = $phpkd_vbltk_replace = '';
+	switch (THIS_SCRIPT)
+	{
+		case 'newthread':
+			$phpkd_vbltk_title = 'subject';
+			$phpkd_vbltk_subject = 'newthread';
+			$phpkd_vbltk_search = '<img id="display_posticon"';
+			$phpkd_vbltk_replace = '<span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span><img id="display_posticon"';
+			break;
+		case 'newreply':
+			$phpkd_vbltk_title = 'title';
+			$phpkd_vbltk_subject = 'newreply';
+			$phpkd_vbltk_search = '<img id="display_posticon"';
+			$phpkd_vbltk_replace = '<span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span><img id="display_posticon"';
+			break;
+		case 'private':
+			$phpkd_vbltk_title = 'title';
+			$phpkd_vbltk_subject = 'pm_newpm';
+			$phpkd_vbltk_search = '<img id="display_posticon"';
+			$phpkd_vbltk_replace = '<span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span><img id="display_posticon"';
+			break;
+		case 'editpost':
+			$phpkd_vbltk_title = 'titlefield';
+			$phpkd_vbltk_subject = 'editpost';
+			$phpkd_vbltk_search = '<img id="posticon_preview"';
+			$phpkd_vbltk_replace = '<span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span><img id="posticon_preview"';
+			break;
+		case 'announcement':
+			$phpkd_vbltk_title = 'titlefield';
+			$phpkd_vbltk_subject = 'announcement_edit';
+			$phpkd_vbltk_search = 'value="\' . $announcementinfo[\'title_safe\'] . \'" tabindex="1" />';
+			$phpkd_vbltk_replace = 'value="\' . $announcementinfo[\'title_safe\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>';
+			break;
+		case 'calendar':
+			$phpkd_vbltk_title = 'titlefield';
+			$phpkd_vbltk_subject = 'calendar_edit';
+			$phpkd_vbltk_search = 'value="\' . $title . \'" tabindex="1"/>';
+			$phpkd_vbltk_replace = 'value="\' . $title . \'" tabindex="1"/><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+			break;
+		case 'usernote':
+			$phpkd_vbltk_title = 'titlefield';
+			$phpkd_vbltk_subject = 'usernote_note';
+			$phpkd_vbltk_search = 'value="\' . $noteinfo[\'title\'] . \'" tabindex="1" />';
+			$phpkd_vbltk_replace = 'value="\' . $noteinfo[\'title\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+			break;
+		case 'infraction':
+			$phpkd_vbltk_title = 'note';
+			$phpkd_vbltk_subject = 'userinfraction';
+			$phpkd_vbltk_search = 'value="\' . $note . \'" tabindex="1" />';
+			$phpkd_vbltk_replace = 'value="\' . $note . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+			break;
+		case 'blog_usercp':
+			if ($_REQUEST['do'] == 'editprofile')
+			{
+				$phpkd_vbltk_title = 'text_blog_title';
+				$phpkd_vbltk_subject = 'blog_cp_modify_profile';
+				$phpkd_vbltk_search = 'value="\' . $bloguserinfo[\'title\'] . \'" tabindex="1" />';
+				$phpkd_vbltk_replace = 'value="\' . $bloguserinfo[\'title\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+			}
+			else
+			{
+				$phpkd_vbltk_title = 'title';
+				$phpkd_vbltk_subject = 'blog_entry_editor';
+				$phpkd_vbltk_search = 'maxlength="\' . $vboptions[\'titlemaxchars\'] . \'" tabindex="1" />';
+				$phpkd_vbltk_replace = 'maxlength="\' . $vboptions[\'titlemaxchars\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+			}
+			// maxlength="{vb:raw vboptions.titlemaxchars}" tabindex="1" />
+			break;
+	}
+
+	$vbulletin->templatecache[$phpkd_vbltk_subject] = str_replace($phpkd_vbltk_search, $phpkd_vbltk_replace, $vbulletin->templatecache[$phpkd_vbltk_subject]);
+
 
 	$templater = vB_Template::create('phpkd_vbltk_40x_headinclude');
 
