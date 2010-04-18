@@ -43,14 +43,14 @@
 				<bitfield name="pc">8</bitfield>
 				<bitfield name="gd">16</bitfield>
 				<bitfield name="gp">32</bitfield>
-				<bitfield name="bg">64</bitfield>
+				<bitfield name="be">64</bitfield>
 			</group>
 			<group name="phpkd_vbltk_qelocation">
 				<bitfield name="po">1</bitfield>
 				<bitfield name="vm">2</bitfield>
 				<bitfield name="pc">4</bitfield>
 				<bitfield name="gd">8</bitfield>
-				<bitfield name="bg">16</bitfield>
+				<bitfield name="be">16</bitfield>
 			</group>
 			<group name="phpkd_vbltk_trltr_dstlang">
 				<bitfield name="ar">1</bitfield>
