@@ -598,7 +598,7 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 }]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
-			<title>PHPKD - Language Tool Kit 'Lite' [ Call JS API & prepare essentials ]</title>
+			<title><![CDATA[PHPKD - Language Tool Kit 'Lite' [ Call JS API & prepare essentials ]]]></title>
 			<hookname>parse_templates</hookname>
 			<phpcode><![CDATA[if ($show['phpkd_vbltk_active'])
 {
