@@ -613,19 +613,19 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 			$phpkd_vbltk_title = 'titlefield';
 			$phpkd_vbltk_subject = 'calendar_edit';
 			$phpkd_vbltk_search = 'value="\' . $title . \'" tabindex="1"/>';
-			$phpkd_vbltk_replace = 'value="\' . $title . \'" tabindex="1"/><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+			$phpkd_vbltk_replace = 'value="\' . $title . \'" tabindex="1"/><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>';
 			break;
 		case 'usernote':
 			$phpkd_vbltk_title = 'titlefield';
 			$phpkd_vbltk_subject = 'usernote_note';
 			$phpkd_vbltk_search = 'value="\' . $noteinfo[\'title\'] . \'" tabindex="1" />';
-			$phpkd_vbltk_replace = 'value="\' . $noteinfo[\'title\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+			$phpkd_vbltk_replace = 'value="\' . $noteinfo[\'title\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>';
 			break;
 		case 'infraction':
 			$phpkd_vbltk_title = 'note';
 			$phpkd_vbltk_subject = 'userinfraction';
 			$phpkd_vbltk_search = 'value="\' . $note . \'" tabindex="1" />';
-			$phpkd_vbltk_replace = 'value="\' . $note . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+			$phpkd_vbltk_replace = 'value="\' . $note . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>';
 			break;
 		case 'blog_usercp':
 			if ($_REQUEST['do'] == 'editprofile')
@@ -633,14 +633,14 @@ else if ($setting['optioncode'] == 'phpkd_vbltk_styles')
 				$phpkd_vbltk_title = 'text_blog_title';
 				$phpkd_vbltk_subject = 'blog_cp_modify_profile';
 				$phpkd_vbltk_search = 'value="\' . $bloguserinfo[\'title\'] . \'" tabindex="1" />';
-				$phpkd_vbltk_replace = 'value="\' . $bloguserinfo[\'title\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+				$phpkd_vbltk_replace = 'value="\' . $bloguserinfo[\'title\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>';
 			}
 			else
 			{
 				$phpkd_vbltk_title = 'title';
 				$phpkd_vbltk_subject = 'blog_entry_editor';
 				$phpkd_vbltk_search = 'maxlength="\' . $vboptions[\'titlemaxchars\'] . \'" tabindex="1" />';
-				$phpkd_vbltk_replace = 'maxlength="\' . $vboptions[\'titlemaxchars\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>"';
+				$phpkd_vbltk_replace = 'maxlength="\' . $vboptions[\'titlemaxchars\'] . \'" tabindex="1" /><span style="padding-' . vB_Template_Runtime::fetchStylevar("left") . ': 5px" id="phpkd_vbltk_title"></span>';
 			}
 			// maxlength="{vb:raw vboptions.titlemaxchars}" tabindex="1" />
 			break;
@@ -871,7 +871,7 @@ Select "Include All Users" for the product to take effect on all users (<strong>
 			<setting varname="phpkd_vbltk_felocation" displayorder="22">
 				<datatype>bitfield</datatype>
 				<optioncode>phpkd_vbltk_felocation</optioncode>
-				<defaultvalue>7</defaultvalue>
+				<defaultvalue>2147483647</defaultvalue>
 			</setting>
 			<setting varname="phpkd_vbltk_inex_users" displayorder="70">
 				<datatype>integer</datatype>
