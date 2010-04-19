@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: PHPKD - Advanced Quick Reply                  Version: 4.0.110 # ||
+|| # Product Name: PHPKD - Language Tool Kit 'Lite'              Version: 4.0.100 # ||
 || # License Type: Free License                                    $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -9,7 +9,7 @@
 || #     This product may be redistributed in whole or significant part under     # ||
 || #        "Creative Commons - Attribution-Noncommercial-Share Alike 3.0"        # ||
 || # 																			  # ||
-|| # ----------------- 'Advanced Quick Reply' IS FREE SOFTWARE ------------------ # ||
+|| # ----------- 'PHPKD - Language Tool Kit 'Lite'' IS FREE SOFTWARE ------------ # ||
 || #        http://www.phpkd.net | http://info.phpkd.net/en/license/free          # ||
 || ################################################################################ ||
 \*==================================================================================*/
@@ -17,19 +17,19 @@
 
 $md5_sums = array(
 	'/clientscript' => array(
-		'phpkd_vbaqr.js' => 'fe8fb56b6eee7eb18886873aee064b42',
+		'phpkd_vbltk.js' => '14ad6813272d9208fe1ec2be168a67d9',
 	),
 	'/includes/xml' => array(
-		'bitfield_phpkd_vbaqr.xml' => '311b1a748dae604ca8685e9909e0c9f2',
+		'bitfield_phpkd_vbltk.xml' => '57c2d63258dac498762857d4eca7f941',
 	),
 );
-$md5_sum_softwareid = 'phpkd_vbaqr';
-$md5_sum_versions['phpkd_vbaqr'] = '4.0.110';
+$md5_sum_softwareid = 'phpkd_vbltk';
+$md5_sum_versions['phpkd_vbltk'] = '4.0.100';
 
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.110
+|| # Version: 4.0.100
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
