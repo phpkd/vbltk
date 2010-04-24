@@ -163,12 +163,10 @@ google.setOnLoadCallback(onLoad);
 <!-- Product Debug Info: Name: {vb:raw phpkd_vbltk.title}, Version: {vb:raw phpkd_vbltk.version}, Revision: {vb:raw phpkd_vbltk.revision}, Released: {vb:raw phpkd_vbltk.released}. -->]]></template>
 		<template name="phpkd_vbltk_40x_transliteration" templatetype="template" date="1271585966" username="PHPKD" version="4.0.100"><![CDATA[{vb:rawphrase remove_text_formatting}" />
 				</li>
-				<!-- Product Debug Info: Name: {vb:raw phpkd_vbltk.title}, Version: {vb:raw phpkd_vbltk.version}, Revision: {vb:raw phpkd_vbltk.revision}, Released: {vb:raw phpkd_vbltk.released}. -->
 				<script type="text/javascript" src="clientscript/phpkd_vbltk.js?vb={vb:raw vboptions.simpleversion}&amp;v={vb:raw phpkd_vbltk.version}"></script>
 				<li>
 					<img src="{vb:stylevar imgdir_editor}/transliteration.png" class="imagebutton" id="{vb:raw editorid}_cmd_phpkd_vbltk" width="20" height="20" alt="{vb:rawphrase phpkd_vbltk_transliteration_title}" />
-				</li>
-				<!-- Product Debug Info: Name: {vb:raw phpkd_vbltk.title}, Version: {vb:raw phpkd_vbltk.version}, Revision: {vb:raw phpkd_vbltk.revision}, Released: {vb:raw phpkd_vbltk.released}. -->]]></template>
+				</li>]]></template>
 		<template name="phpkd_vbltk_40x_transliteration_overlay" templatetype="template" date="1270256936" username="PHPKD" version="4.0.100"><![CDATA[<style type="text/css" id="phpkd_vbltk">
 .editoroverlay.phpkd_vbltk_overlay {width: 750px;}
 .editoroverlay.phpkd_vbltk_overlay textarea {width: 100%; margin-top:{vb:stylevar padding};}
